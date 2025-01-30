@@ -11,7 +11,10 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     Transform cameraHolder;
     public GameObject ceiling;
+
+    [Header("Light Stuff")]
     public GameObject directionLight;
+    public Light spotLight;
 
     Vector2 camRotation;
 
@@ -86,9 +89,13 @@ public class PlayerController : MonoBehaviour
                 sprintMode = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             sprintMode = false;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            sprintMode = true;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -151,7 +158,7 @@ public class PlayerController : MonoBehaviour
         {
             jumps = jumpsMax;
             isGrounded = true;
-        } 
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -167,6 +174,23 @@ public class PlayerController : MonoBehaviour
             Vector3 xAngle = directionLight.transform.eulerAngles;
             float rotateDirectionLight = 20f;
             directionLight.transform.Rotate(xAngle, rotateDirectionLight);
+        }
+
+        if (other.gameObject.name == "Spot Light Range Modifier +")
+        {
+            spotLight.range++;
+        }
+        if (other.gameObject.name == "Spot Light Range Modifier -")
+        {
+            spotLight.range--;
+        }
+        if (other.gameObject.name == "Spot Light intensity Modifier + ")
+        {
+            spotLight.intensity++;
+        }
+        if (other.gameObject.name == "Spot Light intensity Modifier - ")
+        {
+            spotLight.intensity--;
         }
     }
 }
