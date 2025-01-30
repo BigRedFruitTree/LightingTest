@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     Transform cameraHolder;
     public GameObject ceiling;
-    public bool isCeilingActive = false;
 
     Vector2 camRotation;
 
@@ -91,15 +90,13 @@ public class PlayerController : MonoBehaviour
             sprintMode = false;
         }
 
-        if (Input.GetKey(KeyCode.E) && isCeilingActive == false)
+        if (Input.GetKeyDown(KeyCode.E))
         {
             ceiling.SetActive(true);
-            isCeilingActive = true;
         }
-        if (Input.GetKey(KeyCode.E) && isCeilingActive == true)
+        if (Input.GetKeyUp(KeyCode.E))
         {
             ceiling.SetActive(false);
-            isCeilingActive = false;
         }
 
         if (sprintMode == true)

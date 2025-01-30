@@ -842,13 +842,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.70646834, y: -0.17650409, z: 0.18929759, w: 0.6587224}
   m_LocalPosition: {x: 25.1, y: 3.5, z: 36.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 94.00598, y: -30, z: 0}
 --- !u!1 &735307059
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +875,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735307059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10.04}
+  m_LocalPosition: {x: 0, y: 0, z: -10.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -906,7 +906,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First up, is a Direction Light, this is more or less "World Lighting"
+  m_text: First up, is a Direction Light, this is more or less "World Lighting,"
+    as it lights up the scene. As such its good for outdoor areas.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2072,7 +2073,6 @@ MonoBehaviour:
   PlayerObject: {fileID: 1583716450}
   playerCam: {fileID: 963194227}
   ceiling: {fileID: 1212859665}
-  isCeilingActive: 0
   health: 5
   maxHealth: 5
   healthRestore: 5
