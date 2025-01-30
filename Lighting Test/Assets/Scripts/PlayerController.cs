@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     Transform cameraHolder;
     public GameObject ceiling;
+    public GameObject directionLight;
 
     Vector2 camRotation;
 
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 sprintMode = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             sprintMode = false;
         }
@@ -157,6 +158,15 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Direction Light Rotator")
+        {
+            Vector3 xAngle = directionLight.transform.eulerAngles;
+            float rotateDirectionLight = 20f;
+            directionLight.transform.Rotate(xAngle, rotateDirectionLight);
         }
     }
 }
