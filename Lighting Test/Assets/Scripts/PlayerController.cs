@@ -195,19 +195,19 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.name == "Point Light Range Modifier +")
         {
-            spotLight.range++;
+            pointLight.range++;
         }
         if (other.gameObject.name == "Point Light Range Modifier -")
         {
-            spotLight.range--;
+            pointLight.range--;
         }
         if (other.gameObject.name == "Point Light intensity Modifier +")
         {
-            spotLight.intensity++;
+            pointLight.intensity++;
         }
         if (other.gameObject.name == "Point Light intensity Modifier -")
         {
-            spotLight.intensity--;
+            pointLight.intensity--;
         }
     }
 }
