@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Light Stuff")]
     public GameObject directionLight;
+    public GameObject areaLight1;
     public Light spotLight;
     public Light pointLight;
 
@@ -208,6 +209,22 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Point Light intensity Modifier -")
         {
             pointLight.intensity--;
+        }
+
+        if (other.gameObject.name == "Area Light Rotator z")
+        {
+            float rotationSpeed = 10f;
+            areaLight1.transform.Rotate(new Vector3(0, 0, rotationSpeed), Space.World);
+        }
+        if (other.gameObject.name == "Area Light Rotator x")
+        {
+            float rotationSpeed = 10f;
+            areaLight1.transform.Rotate(new Vector3(rotationSpeed, 0, 0), Space.World);
+        }
+        if (other.gameObject.name == "Area Light Rotator y")
+        {
+            float rotationSpeed = 10f;
+            areaLight1.transform.Rotate(new Vector3(0, rotationSpeed, 0), Space.World);
         }
     }
 }
