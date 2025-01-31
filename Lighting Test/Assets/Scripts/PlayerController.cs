@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Light Stuff")]
     public GameObject directionLight;
     public Light spotLight;
+    public Light pointLight;
 
     Vector2 camRotation;
 
@@ -171,9 +172,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.name == "Direction Light Rotator")
         {
-            Vector3 xAngle = directionLight.transform.eulerAngles;
-            float rotateDirectionLight = 20f;
-            directionLight.transform.Rotate(xAngle, rotateDirectionLight);
+            float rotationSpeed = 10f;
+            directionLight.transform.Rotate(new Vector3(rotationSpeed, 0, 0), Space.World);
         }
 
         if (other.gameObject.name == "Spot Light Range Modifier +")
@@ -189,6 +189,23 @@ public class PlayerController : MonoBehaviour
             spotLight.intensity++;
         }
         if (other.gameObject.name == "Spot Light intensity Modifier - ")
+        {
+            spotLight.intensity--;
+        }
+
+        if (other.gameObject.name == "Point Light Range Modifier +")
+        {
+            spotLight.range++;
+        }
+        if (other.gameObject.name == "Point Light Range Modifier -")
+        {
+            spotLight.range--;
+        }
+        if (other.gameObject.name == "Point Light intensity Modifier +")
+        {
+            spotLight.intensity++;
+        }
+        if (other.gameObject.name == "Point Light intensity Modifier -")
         {
             spotLight.intensity--;
         }
