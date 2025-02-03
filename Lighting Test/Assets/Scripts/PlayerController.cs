@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public int health = 5;
     public int maxHealth = 5;
     public int healthRestore = 5;
+    public bool canTakeDamage = true;
+    public TextMeshProUGUI Health;
 
     [Header("Movement Settings")]
     public float speed = 10.0f;
@@ -152,6 +155,11 @@ public class PlayerController : MonoBehaviour
 
         if (health == 0)
             GameOver = true;
+
+        if (canTakeDamage == false)
+            StartCoroutine("HitCoolDown");
+
+        Health.text = "Health: " + health;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -226,5 +234,11 @@ public class PlayerController : MonoBehaviour
             float rotationSpeed = 10f;
             areaLight1.transform.Rotate(new Vector3(0, rotationSpeed, 0), Space.World);
         }
+    }
+
+    IEnumerator HitCoolDown()
+    {
+        yield return new WaitForSeconds(1f);
+        canTakeDamage = true;
     }
 }
