@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float speed = 10.0f;
     public float sprintMultiplier = 2f;
-    public float jumpHeight = 10.0f;
+    [SerializeField] public float jumpHeight = 10.0f;
     public float groundDetectDistance = 1.5f;
     public int jumps = 2;
     public int jumpsMax = 2;
@@ -267,6 +267,11 @@ public class PlayerController : MonoBehaviour
         {
           canJump = false;
         }
+
+        if (other.gameObject.tag == "Extra Jump Light")
+        {
+            jumpHeight = 12;
+        }
     }
 
     private void OnTriggerExit(Collider other) 
@@ -274,6 +279,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "NoJumpLight")
         {
           canJump = true;
+        }
+
+        if (other.gameObject.tag == "Extra Jump Light")
+        {
+            jumpHeight = 6;
         }
     }
 
