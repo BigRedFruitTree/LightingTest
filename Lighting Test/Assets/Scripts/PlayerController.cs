@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 5;
     public int healthRestore = 5;
     public bool canTakeDamage = true;
+    public bool canHeal = true;
     public TextMeshProUGUI Health;
 
     [Header("Movement Settings")]
@@ -79,11 +80,12 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 temp = myRB.velocity;
-
+        
         float verticalMove = Input.GetAxisRaw("Vertical");
         float horizontalMove = Input.GetAxisRaw("Horizontal");
+        
 
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0 && GameOver == false)
         {
             if (stamina > 0)
             {
@@ -158,6 +160,9 @@ public class PlayerController : MonoBehaviour
 
         if (canTakeDamage == false)
             StartCoroutine("HitCoolDown");
+
+        if(health > maxHealth)
+        health = maxHealth;
 
         Health.text = "Health: " + health;
     }
@@ -236,9 +241,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other) 
+    {
+        if (other.gameObject.tag == "HealthRegenLight" && canHeal == true)
+        {
+           canHeal = false;
+           health++;
+           StartCoroutine("HealCoolDown");
+        }
+    }
+
     IEnumerator HitCoolDown()
     {
         yield return new WaitForSeconds(1f);
         canTakeDamage = true;
+    }
+
+    IEnumerator HealCoolDown()
+    {
+        yield return new WaitForSeconds(1f);
+        canHeal = true;
     }
 }
