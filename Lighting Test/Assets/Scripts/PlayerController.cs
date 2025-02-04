@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     public float stamina = 150;
     public float maxStamina = 150;
+    public bool canJump = true;
 
 
     [Header("User Settings")]
@@ -144,7 +145,7 @@ public class PlayerController : MonoBehaviour
             temp.z = horizontalMove * speed;
         }
             
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && GameOver == false)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && GameOver == false && canJump == true)
         {
             temp.y = jumpHeight;
             jumps--;
@@ -248,6 +249,19 @@ public class PlayerController : MonoBehaviour
            canHeal = false;
            health++;
            StartCoroutine("HealCoolDown");
+        }
+
+        if (other.gameObject.tag == "NoJumpLight")
+        {
+          canJump = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        if (other.gameObject.tag == "NoJumpLight")
+        {
+          canJump = true;
         }
     }
 
