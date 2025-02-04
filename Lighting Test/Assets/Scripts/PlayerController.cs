@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject areaLight1;
     public Light spotLight;
     public Light pointLight;
+    public float rotationSpeed = 10f;
 
     Vector2 camRotation;
 
@@ -193,8 +194,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.name == "Direction Light Rotator")
         {
-            float rotationSpeed = 10f;
+            rotationSpeed = 10f;
             directionLight.transform.Rotate(new Vector3(rotationSpeed, 0, 0), Space.World);
+        }
+        if (other.gameObject.name == "Direction Light Reset")
+        {
+            rotationSpeed = 94.00598f;
+            directionLight.transform.rotation = Quaternion.Euler(rotationSpeed, 0, 0);
         }
 
         if (other.gameObject.name == "Spot Light Range Modifier +")
