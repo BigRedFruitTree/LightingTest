@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class BasicEnemyController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class BasicEnemyController : MonoBehaviour
     public PlayerController Player;
     public NavMeshAgent agent;
     public GameObject detection;
+    public TextMeshPro healthText;
 
 
 
@@ -22,6 +24,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
+        healthText.text = "Health: " + health;
     }
 
     // Update is called once per frame
@@ -30,27 +33,35 @@ public class BasicEnemyController : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            Destroy(detection);
         }
 
-        if (detection.GetComponent<BasicEnemyDetectionBox>().detectPlayer == true && canMove == true)
+        if (detection.GetComponent<BasicEnemyDetectionBox>().detectPlayer == true && canMove == true && health >= 0)
         {
             agent.destination = Player.transform.position;
+        } 
+
+        if(health >= 0)
+        {
+           healthText.text = "Health: " + health;
+           detection.transform.position = gameObject.transform.position;
         }
+           
     }
 
-    private void OnTriggerStay(Collider other) 
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "HealthRegenLight" && canTakeDamage == true)
+        if(other.gameObject.tag == "HealthRegenLight" && canTakeDamage == true)
         {
-           health--;
-           canTakeDamage = false;
-           StartCoroutine("HitCoolDown");
+            health--;
+            canTakeDamage = false;
+            StartCoroutine("HitCoolDown");
         }
     }
 
     IEnumerator HitCoolDown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         canTakeDamage = true;
     }
 }

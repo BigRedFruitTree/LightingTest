@@ -175,6 +175,12 @@ public class PlayerController : MonoBehaviour
             jumps = jumpsMax;
             isGrounded = true;
         }
+        if (collision.gameObject.tag == "Enemy" && canTakeDamage == true)
+        {
+            health--;
+            canTakeDamage = false;
+            StartCoroutine("HitCoolDown");
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
