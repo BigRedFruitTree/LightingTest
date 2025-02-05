@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float speed = 10.0f;
     public float sprintMultiplier = 2f;
-    [SerializeField] public float jumpHeight = 10.0f;
+    [SerializeField] private float jumpHeight = 4f;
     public float groundDetectDistance = 1.5f;
     public int jumps = 2;
     public int jumpsMax = 2;
@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     public float Ysensitivity = 2.0f;
     public float camRotationLimit = 90f;
     public bool GameOver = false;
+    public Transform weaponSlot;
+    public GameObject FlashlightLight;
+    private bool hasFlashlight = false;
    
     // Start is called before the first frame update
     void Start()
@@ -167,6 +170,16 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
 
         Health.text = "Health: " + health;
+
+        if (Input.GetMouseButtonDown(0) && hasFlashlight == true)
+        {
+           FlashlightLight.SetActive(true);
+        }
+        
+        if (Input.GetMouseButtonUp(0) && hasFlashlight == true)
+        {
+           FlashlightLight.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -252,6 +265,18 @@ public class PlayerController : MonoBehaviour
             float rotationSpeed = 10f;
             areaLight1.transform.Rotate(new Vector3(0, rotationSpeed, 0), Space.World);
         }
+
+        if (other.gameObject.name == "Extra Jump Light")
+        {
+            jumpHeight = 12;
+        }
+
+        if (other.gameObject.name == "Flashlight")
+        {
+            hasFlashlight = true;
+            other.gameObject.transform.SetPositionAndRotation(weaponSlot.position, weaponSlot.rotation);
+            other.gameObject.transform.SetParent(weaponSlot);
+        }
     }
 
     private void OnTriggerStay(Collider other) 
@@ -267,11 +292,6 @@ public class PlayerController : MonoBehaviour
         {
           canJump = false;
         }
-
-        if (other.gameObject.tag == "Extra Jump Light")
-        {
-            jumpHeight = 12;
-        }
     }
 
     private void OnTriggerExit(Collider other) 
@@ -281,9 +301,9 @@ public class PlayerController : MonoBehaviour
           canJump = true;
         }
 
-        if (other.gameObject.tag == "Extra Jump Light")
+        if (other.gameObject.name == "Extra Jump Light")
         {
-            jumpHeight = 6;
+            jumpHeight = 4;
         }
     }
 
