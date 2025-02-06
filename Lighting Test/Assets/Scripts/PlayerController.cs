@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
     Transform cameraHolder;
     public GameObject ceiling;
 
+    [Header("Shader Stuff")]
+    public GameObject postProcessLayer;
+    public GameObject postProcessVolume;
+    public GameObject postProcessBloom;
+
     [Header("Light Stuff")]
     public GameObject directionLight;
     public GameObject areaLight1;
@@ -81,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
             playerCam.transform.rotation = Quaternion.Euler(-camRotation.y, camRotation.x, 0);
             transform.localRotation = Quaternion.AngleAxis(camRotation.x, Vector3.up);
+
 
         }
 
