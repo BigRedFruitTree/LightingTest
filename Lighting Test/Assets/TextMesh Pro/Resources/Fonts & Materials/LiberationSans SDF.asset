@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LiberationSans SDF Material
-  m_Shader: {fileID: 4800000, guid: f7ada0af4f174f0694ca6a487b8f543d, type: 3}
+  m_Shader: {fileID: 4800000, guid: 85187c2149c549c5b33f0cdb02836b17, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -46,6 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - PixelSnap: 0
     - _Ambient: 0.5
     - _Bevel: 0.5
     - _BevelClamp: 0
@@ -56,7 +61,9 @@ Material:
     - _BumpOutline: 0
     - _ColorMask: 15
     - _CullMode: 0
+    - _Cutoff: 0
     - _Diffuse: 0.5
+    - _EnableExternalAlpha: 0
     - _FaceDilate: 0
     - _FaceShininess: 0
     - _FaceUVSpeedX: 0
@@ -104,7 +111,7 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 0.015625, g: 0.015625, b: 0.015625, a: 1}
+    - _FaceColor: {r: 1.430902, g: 1.430902, b: 1.430902, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
