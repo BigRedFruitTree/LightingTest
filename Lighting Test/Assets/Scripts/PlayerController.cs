@@ -14,9 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject ceiling;
 
     [Header("Shader Stuff")]
-    public GameObject postProcessLayer;
-    public GameObject postProcessVolume;
-    public GameObject postProcessBloom;
+
 
     [Header("Light Stuff")]
     public GameObject directionLight;
@@ -68,8 +66,6 @@ public class PlayerController : MonoBehaviour
         camRotation = Vector2.zero;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-       
     }
 
     // Update is called once per frame
@@ -169,13 +165,24 @@ public class PlayerController : MonoBehaviour
             health = 0;
 
         if (health == 0)
+        {
             GameOver = true;
+            myRB.constraints = RigidbodyConstraints.FreezePosition;
+            myRB.constraints = RigidbodyConstraints.FreezeRotation;
+        }
 
         if (canTakeDamage == false)
             StartCoroutine("HitCoolDown");
 
         if(health > maxHealth)
         health = maxHealth;
+
+        if (health > 0)
+        {
+            GameOver = false;
+            myRB.constraints = RigidbodyConstraints.None;
+            myRB.constraints = RigidbodyConstraints.FreezeRotation;
+        }
 
         Health.text = "Health: " + health;
 
@@ -300,6 +307,8 @@ public class PlayerController : MonoBehaviour
         {
           canJump = false;
         }
+
+
     }
 
     private void OnTriggerExit(Collider other) 
