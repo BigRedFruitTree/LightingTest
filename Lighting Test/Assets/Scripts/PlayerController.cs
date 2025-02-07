@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
         camRotation = Vector2.zero;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+       
     }
 
     // Update is called once per frame
@@ -87,7 +89,7 @@ public class PlayerController : MonoBehaviour
             playerCam.transform.rotation = Quaternion.Euler(-camRotation.y, camRotation.x, 0);
             transform.localRotation = Quaternion.AngleAxis(camRotation.x, Vector3.up);
 
-
+            
         }
 
         Vector3 temp = myRB.velocity;
