@@ -290,6 +290,11 @@ public class PlayerController : MonoBehaviour
             other.gameObject.transform.SetPositionAndRotation(weaponSlot.position, weaponSlot.rotation);
             other.gameObject.transform.SetParent(weaponSlot);
         }
+
+        if (other.gameObject.name == "DeathLight")
+        {
+            health = 0;
+        }
     }
 
     private void OnTriggerStay(Collider other) 
