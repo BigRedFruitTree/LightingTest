@@ -3045,6 +3045,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 468587188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &308996995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 308996997}
+  - component: {fileID: 308996996}
+  m_Layer: 0
+  m_Name: Middle Bit (thick of it)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &308996996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308996995}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 18, y: 10, z: 180}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &308996997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308996995}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.0061086393, z: -0, w: 0.99998134}
+  m_LocalPosition: {x: -14.29, y: 1089.9225, z: -1244.3796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 327547585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.7, z: 0}
 --- !u!1 &313787889
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,6 +3533,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 308996997}
   - {fileID: 925197826}
   - {fileID: 10675971}
   - {fileID: 2003270026}
@@ -16533,6 +16587,9 @@ MonoBehaviour:
   PlayerObject: {fileID: 1583716450}
   playerCam: {fileID: 963194227}
   ceiling: {fileID: 1212859665}
+  deathLightChanger: {fileID: 0}
+  thickOfIt: {fileID: 0}
+  inTheThickOfIt: 0
   directionLight: {fileID: 705507993}
   areaLight1: {fileID: 795483875}
   spotLight: {fileID: 1922222763}
@@ -20178,7 +20235,7 @@ Transform:
   m_GameObject: {fileID: 2010563756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.78, y: 6.71, z: -149.71}
+  m_LocalPosition: {x: -54.47, y: 6.71, z: -148.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20203,7 +20260,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 9
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!108 &2010563759
 Light:
@@ -20258,7 +20315,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -20278,8 +20335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e337b47162dc39419d9e225258d27f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 2010563756}
+  light: {fileID: 2010563759}
+  dLight: {fileID: 0}
   Player: {fileID: 0}
+  timer: 0
+  canTimerStart: 1
 --- !u!1 &2040928944
 GameObject:
   m_ObjectHideFlags: 0

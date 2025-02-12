@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public GameObject ceiling;
 
     [Header("Shader Stuff")]
+    public DeathLightChanger deathLightChanger;
+    public GameObject thickOfIt;
+    public bool inTheThickOfIt = false;
 
 
     [Header("Light Stuff")]
@@ -311,7 +314,10 @@ public class PlayerController : MonoBehaviour
           canJump = false;
         }
 
-
+        if (other.gameObject.name == "Middle Bit (thick of it)")
+        {
+            inTheThickOfIt = true;
+        }
     }
 
     private void OnTriggerExit(Collider other) 
@@ -324,6 +330,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Extra Jump Light")
         {
             jumpHeight = 4;
+        }
+
+        if (other.gameObject.name == "Middle Bit (thick of it)")
+        {
+            inTheThickOfIt = false;
         }
     }
 

@@ -4,20 +4,53 @@ using UnityEngine;
 
 public class DeathLightChanger : MonoBehaviour
 {
-    public new GameObject light;
+    public new Light light;
+    public SphereCollider dLight;
     public PlayerController Player;
-
+    [SerializeField] public float timer;
+    public bool canTimerStart = true;
 
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        dLight = GetComponent<SphereCollider>();
+        timer = 9f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        light.intensity = timer;
+        light.range = timer;
+        dLight.radius = timer;
+
+
+        if (Player.inTheThickOfIt == true)
+        {
+            if(light.intensity <= 9f && light.intensity != 0f && canTimerStart == true)
+            {
+                StartCoroutine("Wait");
+                timer -= Time.deltaTime;
+                if(light.intensity == 0f)
+                {
+                    canTimerStart = false;
+                }
+            }
+
+
+            if (light.intensity >= 0f && light.intensity != 9f && canTimerStart == false)
+            {
+                StartCoroutine("Wait");
+                timer += Time.deltaTime;
+                if (light.intensity == 9f)
+                {
+                    canTimerStart = true;
+                }
+            }
+
+        }
     }
 
     IEnumerator Wait()
