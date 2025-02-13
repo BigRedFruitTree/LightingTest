@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera playerCam;
     Transform cameraHolder;
     public GameObject ceiling;
+    public GameObject middleDoor;
 
     [Header("Shader Stuff")]
     public DeathLightChanger deathLightChanger;
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
         Health.text = "Health: " + health;
 
-        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.00001f && FlashLightLight.range <= 10.00001f)
+        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 10.000001f)
         {
             StartCoroutine("Wait");
             FlashLightLight.intensity += Time.deltaTime;
@@ -297,6 +298,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.name == "Flashlight")
         {
             hasFlashlight = true;
+            middleDoor.SetActive(false);
             other.gameObject.transform.SetPositionAndRotation(weaponSlot.position, weaponSlot.rotation);
             other.gameObject.transform.SetParent(weaponSlot);
         }
