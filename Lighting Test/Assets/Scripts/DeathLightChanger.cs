@@ -29,25 +29,23 @@ public class DeathLightChanger : MonoBehaviour
 
         if (Player.inTheThickOfIt == true)
         {
-            if(light.intensity <= 9f && light.intensity != 0f && canTimerStart == true)
+            if(light.intensity <= 9f && light.intensity != 0f && canTimerStart == true || light.intensity >= 9f && light.intensity != 0f && canTimerStart == true)
             {
                 StartCoroutine("Wait");
                 timer -= Time.deltaTime;
-                if(light.intensity == 0f)
-                {
-                    canTimerStart = false;
-                }
+            } else
+            {
+                canTimerStart = false;
             }
 
 
-            if (light.intensity >= 0f && light.intensity != 9f && canTimerStart == false)
+            if (light.intensity <= 9.00001f && canTimerStart == false)
             {
                 StartCoroutine("Wait");
                 timer += Time.deltaTime;
-                if (light.intensity == 9f)
-                {
-                    canTimerStart = true;
-                }
+            } else
+            {
+                canTimerStart = true;
             }
 
         }
