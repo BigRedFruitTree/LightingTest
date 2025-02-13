@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
     public float camRotationLimit = 90f;
     public bool GameOver = false;
     public Transform weaponSlot;
-    public GameObject FlashlightLight;
+    public GameObject FlashlightLightG;
+    public Light FlashLightLight;
     private bool hasFlashlight = false;
    
     // Start is called before the first frame update
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         camRotation = Vector2.zero;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        FlashLightLight = GameObject.Find("FlashLightLight").GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -187,14 +189,19 @@ public class PlayerController : MonoBehaviour
 
         Health.text = "Health: " + health;
 
-        if (Input.GetMouseButtonDown(0) && hasFlashlight == true)
+        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.00001f && FlashLightLight.range <= 10.00001f)
         {
-           FlashlightLight.SetActive(true);
+            StartCoroutine("Wait");
+            FlashLightLight.intensity += Time.deltaTime;
+            FlashLightLight.range += Time.deltaTime;
+
         }
         
-        if (Input.GetMouseButtonUp(0) && hasFlashlight == true)
+        if (!Input.GetMouseButton(0) && hasFlashlight == true)
         {
-           FlashlightLight.SetActive(false);
+            StartCoroutine("Wait");
+            FlashLightLight.intensity -= Time.deltaTime * 3;
+            FlashLightLight.range -= Time.deltaTime * 3;
         }
     }
 
@@ -348,5 +355,10 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         canHeal = true;
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

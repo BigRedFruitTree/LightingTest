@@ -9,6 +9,8 @@ public class DeathLightChanger : MonoBehaviour
     public PlayerController Player;
     [SerializeField] public float timer;
     public bool canTimerStart = true;
+    public float min = 0f;
+    public float max = 9.00001f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,7 @@ public class DeathLightChanger : MonoBehaviour
 
         if (Player.inTheThickOfIt == true)
         {
-            if(light.intensity <= 9f && light.intensity != 0f && canTimerStart == true || light.intensity >= 9f && light.intensity != 0f && canTimerStart == true)
+            if(light.intensity <= max && light.intensity != min && canTimerStart == true || light.intensity >= max && light.intensity != min && canTimerStart == true)
             {
                 StartCoroutine("Wait");
                 timer -= Time.deltaTime;
@@ -39,7 +41,7 @@ public class DeathLightChanger : MonoBehaviour
             }
 
 
-            if (light.intensity <= 9.00001f && canTimerStart == false)
+            if (light.intensity <= max && canTimerStart == false)
             {
                 StartCoroutine("Wait");
                 timer += Time.deltaTime;
