@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     Transform cameraHolder;
     public GameObject ceiling;
     public GameObject middleDoor;
+    public BossController bossController;
+    public Rigidbody boss;
+    public float maxDist;
 
     [Header("Shader Stuff")]
     public DeathLightChanger deathLightChanger;
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public GameObject FlashlightLightG;
     public Light FlashLightLight;
     private bool hasFlashlight = false;
+
    
     // Start is called before the first frame update
     void Start()
@@ -190,19 +194,34 @@ public class PlayerController : MonoBehaviour
 
         Health.text = "Health: " + health;
 
-        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 10.000001f)
+
+        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 20.000001f)
         {
             StartCoroutine("Wait");
             FlashLightLight.intensity += Time.deltaTime;
             FlashLightLight.range += Time.deltaTime;
+            maxDist = FlashLightLight.range / 20;
 
         }
-        
+
+        if(Input.GetMouseButton(0) && hasFlashlight == true)
+        {
+            if (Physics.Raycast(FlashLightLight.transform.position, PlayerObject.transform.TransformDirection(Vector3.forward), out RaycastHit hit, maxDist))
+            {
+                if (hit.rigidbody == boss)
+                {
+                    bossController.hit = true;
+                }
+            }
+        }
+
         if (!Input.GetMouseButton(0) && hasFlashlight == true)
         {
             StartCoroutine("Wait");
             FlashLightLight.intensity -= Time.deltaTime * 3;
             FlashLightLight.range -= Time.deltaTime * 3;
+            maxDist = FlashLightLight.range;
+            bossController.hit = false;
         }
     }
 
@@ -307,6 +326,13 @@ public class PlayerController : MonoBehaviour
         {
             health = 0;
         }
+
+        if (other.gameObject.name == "BossLight" && canTakeDamage == true)
+        {
+            health--;
+            canTakeDamage = false;
+            StartCoroutine("HitCoolDown");
+        }
     }
 
     private void OnTriggerStay(Collider other) 
@@ -361,6 +387,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
     }
 }
