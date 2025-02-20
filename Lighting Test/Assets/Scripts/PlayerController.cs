@@ -62,8 +62,11 @@ public class PlayerController : MonoBehaviour
     public GameObject FlashlightLightG;
     public Light FlashLightLight;
     private bool hasFlashlight = false;
+    public BoxCollider flashLightB;
+    private RaycastHit hit;
+    private float radius = 2f;
 
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +100,8 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 temp = myRB.velocity;
+
+        Vector3 origin = FlashLightLight.transform.position;
         
         float verticalMove = Input.GetAxisRaw("Vertical");
         float horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -192,25 +197,29 @@ public class PlayerController : MonoBehaviour
             myRB.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        Health.text = "Health: " + health;
+        maxDist = FlashLightLight.range;
 
+        Health.text = "Health: " + health;
 
         if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 20.000001f)
         {
             StartCoroutine("Wait");
             FlashLightLight.intensity += Time.deltaTime;
             FlashLightLight.range += Time.deltaTime;
-            maxDist = FlashLightLight.range / 20;
-
         }
 
-        if(Input.GetMouseButton(0) && hasFlashlight == true)
+        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 20.000001f)
         {
-            if (Physics.Raycast(FlashLightLight.transform.position, PlayerObject.transform.TransformDirection(Vector3.forward), out RaycastHit hit, maxDist))
+            if(Physics.SphereCast(origin, radius, FlashlightLightG.transform.TransformDirection(Vector3.up), out RaycastHit hit, maxDist))
             {
-                if (hit.rigidbody == boss)
+                if(hit.rigidbody == boss)
                 {
                     bossController.hit = true;
+                }
+
+                if (hit.rigidbody != boss)
+                {
+                    bossController.hit = false;
                 }
             }
         }
@@ -220,8 +229,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine("Wait");
             FlashLightLight.intensity -= Time.deltaTime * 3;
             FlashLightLight.range -= Time.deltaTime * 3;
-            maxDist = FlashLightLight.range;
-            bossController.hit = false;
+
         }
     }
 

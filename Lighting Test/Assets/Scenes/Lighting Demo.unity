@@ -2508,7 +2508,7 @@ Transform:
   m_GameObject: {fileID: 245827941}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.61, y: -0.444, z: 1.12}
+  m_LocalPosition: {x: 0.551, y: -0.444, z: 1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14552,6 +14552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1257537244}
   - component: {fileID: 1257537245}
+  - component: {fileID: 1257537246}
   m_Layer: 0
   m_Name: FlashLightLight
   m_TagString: Untagged
@@ -14587,8 +14588,8 @@ Light:
   m_Color: {r: 1, g: 0.98501664, b: 0.8726415, a: 1}
   m_Intensity: 0
   m_Range: 0
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 13.1
+  m_InnerSpotAngle: 12.7
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -14635,6 +14636,27 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!65 &1257537246
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257537243}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1258662204
 GameObject:
   m_ObjectHideFlags: 0
@@ -17555,7 +17577,7 @@ MonoBehaviour:
   ceiling: {fileID: 1212859665}
   middleDoor: {fileID: 1023814273}
   bossController: {fileID: 1900069315}
-  boss: {fileID: 0}
+  boss: {fileID: 1900069313}
   maxDist: 0
   deathLightChanger: {fileID: 0}
   thickOfIt: {fileID: 0}
@@ -17588,8 +17610,9 @@ MonoBehaviour:
   camRotationLimit: 90
   GameOver: 0
   weaponSlot: {fileID: 245827942}
-  FlashlightLightG: {fileID: 0}
+  FlashlightLightG: {fileID: 754895270}
   FlashLightLight: {fileID: 0}
+  flashLightB: {fileID: 1257537246}
 --- !u!54 &1583716452
 Rigidbody:
   m_ObjectHideFlags: 0
