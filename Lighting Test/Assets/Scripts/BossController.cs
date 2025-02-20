@@ -24,6 +24,8 @@ public class BossController : MonoBehaviour
     public bool canTimerStart = true;
     public float min = 0f;
     public float max = 9.00001f;
+    public GameObject lightG;
+    public GameObject boss;
 
     public bool hit = false;
 
@@ -89,6 +91,8 @@ public class BossController : MonoBehaviour
                 canTakeDamage = false;
                 StartCoroutine("HitCoolDown");
             }
+
+            lightG.transform.position = boss.transform.position;
 
         }
 

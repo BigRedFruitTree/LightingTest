@@ -20634,6 +20634,8 @@ MonoBehaviour:
   canTimerStart: 1
   min: 0
   max: 7.00001
+  lightG: {fileID: 1909533659}
+  boss: {fileID: 1900069307}
   hit: 0
 --- !u!135 &1900069317
 SphereCollider:
