@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject middleDoor;
     public BossController bossController;
     public Rigidbody boss;
+    public GameObject bossG;
     public float maxDist;
 
     [Header("Shader Stuff")]
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour
     private bool hasFlashlight = false;
     public BoxCollider flashLightB;
     private RaycastHit hit;
-    private float radius = 2f;
 
 
     // Start is called before the first frame update
@@ -208,28 +208,23 @@ public class PlayerController : MonoBehaviour
             FlashLightLight.range += Time.deltaTime;
         }
 
-        if (Input.GetMouseButton(0) && hasFlashlight == true && FlashLightLight.intensity <= 10.000001f && FlashLightLight.range <= 20.000001f)
+        Vector3 direction = (FlashlightLightG.transform.position - bossG.transform.position).normalized;
+        if (Vector3.Distance(bossG.transform.position, FlashlightLightG.transform.position) <= FlashLightLight.range && Vector3.Angle(FlashlightLightG.transform.up, direction) > FlashLightLight.spotAngle)
         {
-            if(Physics.SphereCast(origin, radius, FlashlightLightG.transform.TransformDirection(Vector3.up), out RaycastHit hit, maxDist))
-            {
-                if(hit.rigidbody == boss)
-                {
-                    bossController.hit = true;
-                }
-
-                if (hit.rigidbody != boss)
-                {
-                    bossController.hit = false;
-                }
-            }
+            bossController.hit = true;
         }
+        else
+        {
+            bossController.hit = false;
+        }
+
 
         if (!Input.GetMouseButton(0) && hasFlashlight == true)
         {
             StartCoroutine("Wait");
             FlashLightLight.intensity -= Time.deltaTime * 3;
             FlashLightLight.range -= Time.deltaTime * 3;
-
+            
         }
     }
 
